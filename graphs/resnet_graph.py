@@ -138,9 +138,9 @@ if __name__ == '__main__':
     merge = ModelMerge(graph1, graph2)
     merge.transform(model3, dataloader, transform_fn=match_tensors_zipit)
 
-    graph1.draw(nodes=range(20))
-    graph1.draw(nodes=range(len(graph1.G)-20, len(graph1.G)))
+    graph1.draw(nodes=range(20), save_path='/tmp/graph1.png')
+    graph1.draw(nodes=range(len(graph1.G)-20, len(graph1.G)), save_path='/tmp/graph2.png')
 
-    print(model.eval().cuda()(data_x.cuda()))
+    print(model.eval()(data_x))
 
-    print(merge(data_x.cuda()))
+    print(merge(data_x))

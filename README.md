@@ -92,3 +92,12 @@ If you use ZipIt! or this codebase in your work, please cite:
 }
 ```
 
+
+## Daniter notes
+
+Installation steps:  
+```
+sudo apt-get install python3-dev graphviz libgraphviz-dev pkg-config
+pip install pygraphviz
+```
+

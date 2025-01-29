@@ -217,19 +217,19 @@ class ModelMerge(nn.Module):
         """
         Initialize merge attributes with new set of graphs.
         """
-        # move all graph models to eval
-        for g in graphs:
-            g.model.to(device).eval()
-
         self.graphs = graphs
-        self.device = device
+        self.device = "cuda" if torch.cuda.is_available() else "cpu" # device
+
+        # move all graph models to eval
+        for g in self.graphs:
+            g.model.to(self.device).eval()
 
         self.merged_model = None
         # Initialize heads for partial zipping
         self.head_models = nn.ModuleList([g.model for g in self.graphs])
         # Add hooks on intermediate layers for computing intra-model alignment metrics
         for graph in self.graphs:
-            graph.add_hooks(device=device)
+            graph.add_hooks(device=self.device)
 
 
     def compute_metrics(self, dataloader, metric_classes):
